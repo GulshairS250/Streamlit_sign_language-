@@ -8,14 +8,17 @@ import os
 import time
 
 os.environ.setdefault("OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS", "0")
+# Keras 3 (TF 2.17+) cannot load older .h5 from the notebook; use Keras 2 implementation.
+os.environ.setdefault("TF_USE_LEGACY_KERAS", "1")
 
 from pathlib import Path
+from typing import Any
 
 import cv2
+import mediapipe as mp
 import numpy as np
 import streamlit as st
 import tensorflow as tf
-import mediapipe as mp
 
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_MODEL = BASE_DIR / "model.h5"
@@ -114,12 +117,12 @@ def draw_prob_bars(
 
 
 @st.cache_resource
-def load_sign_model(model_path_str: str, weights_path_str: str) -> tf.keras.Model:
+def load_sign_model(model_path_str: str, weights_path_str: str) -> Any:
     model_path = Path(model_path_str)
     weights_path = Path(weights_path_str)
     if not model_path.is_file():
         raise FileNotFoundError(f"Missing model file: {model_path}")
-    model = tf.keras.models.load_model(str(model_path))
+    model = tf.keras.models.load_model(str(model_path), compile=False)
     if weights_path.is_file():
         model.load_weights(str(weights_path))
     return model
