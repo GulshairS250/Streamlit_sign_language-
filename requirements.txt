@@ -1,8 +1,10 @@
-# Streamlit Community Cloud uses Python 3.12 by default. TensorFlow wheels for 3.12
-# require tensorflow>=2.16 (use 2.17+ for broad compatibility).
-# tensorflow-cpu installs faster and is enough for inference (load_model / predict).
+# Pinned for Streamlit Community Cloud (Python 3.12) + local use.
+# Use `tensorflow` (not tensorflow-cpu): tf-keras depends on it; avoids two TF installs.
+# TF_USE_LEGACY_KERAS in app.py + tf-keras loads notebook-era .h5 under Keras 3.
 streamlit>=1.28.0,<2.0.0
-tensorflow-cpu>=2.17.0,<2.19.0
-opencv-python-headless>=4.9.0,<5.0.0
-mediapipe>=0.10.14
-numpy>=1.26.0,<2.0.0
+tensorflow==2.18.1
+tf-keras==2.18.0
+numpy==1.26.4
+protobuf>=4.25.3,<6
+opencv-python-headless==4.10.0.84
+mediapipe==0.10.21
