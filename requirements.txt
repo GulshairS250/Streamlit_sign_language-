@@ -1,6 +1,8 @@
-# Streamlit app + LSTM sign detection (RealTimeSignLanguageDetection.ipynb pipeline)
-streamlit>=1.28.0
-tensorflow>=2.15.0,<2.17.0
-opencv-python>=4.8.0
+# Streamlit Community Cloud uses Python 3.12 by default. TensorFlow wheels for 3.12
+# require tensorflow>=2.16 (use 2.17+ for broad compatibility).
+# tensorflow-cpu installs faster and is enough for inference (load_model / predict).
+streamlit>=1.28.0,<2.0.0
+tensorflow-cpu>=2.17.0,<2.19.0
+opencv-python-headless>=4.9.0,<5.0.0
 mediapipe>=0.10.14
-numpy>=1.24.0,<2.0.0
+numpy>=1.26.0,<2.0.0
